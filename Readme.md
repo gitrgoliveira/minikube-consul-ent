@@ -3,6 +3,17 @@ The idea of this repo is to demo Consul Enterprise features of a single cluster 
 
 Please read the requirements before proceeding.
 
+- [Consul Enterprise features demo](#consul-enterprise-features-demo)
+  - [Requirements](#requirements)
+  - [Setup steps](#setup-steps)
+  - [Demos steps](#demos-steps)
+    - [Consul Namespaces](#consul-namespaces)
+    - [Snapshot Agent demo](#snapshot-agent-demo)
+    - [SSO / OIDC](#sso--oidc)
+    - [Audit logs](#audit-logs)
+    - [Bonus Demo !](#bonus-demo-)
+  - [Clean up](#clean-up)
+
 ## Requirements
 1. Helm3 cli
 2. minikube (with hyperkit) & kubectl
@@ -70,5 +81,5 @@ To use it, you'll need to:
 1. run `azure_AD_consul.sh`
 2. login via UI or using `consul login -type=oidc -method=aad -token-sink-file=./token`
 
-# Clean up
-You can use the bash script `02_cleanup.sh`
+## Clean up
+You can use the bash script `01_cleanup.sh`
