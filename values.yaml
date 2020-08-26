@@ -1,0 +1,84 @@
+global:
+  name: consul
+  image: "hashicorp/consul-enterprise:1.8-ent"
+  datacenter: dc1
+  gossipEncryption:
+    secretName: consul-gossip-encryption-key
+    secretKey: key
+  tls:
+    enabled: true
+    enableAutoEncrypt: true
+    verify: true
+    httpsOnly: true
+    enableConsulNamespaces: true
+  acls:
+    manageSystemACLs: true
+    createReplicationToken: true
+
+server:
+  replicas: 3
+  bootstrapExpect: 3
+  disruptionBudget:
+    enabled: true
+    maxUnavailable: 2
+  affinity: ""
+  enterpriseLicense:
+    secretName: consul-license
+    secretKey: license
+  extraConfig: |
+    {
+      "log_level": "DEBUG",
+      "dns_config": {
+        "service_ttl": {
+          "*": "1s"
+        },
+        "node_ttl": "1s",
+        "prefer_namespace": true
+      },
+      "autopilot" : {
+        "cleanup_dead_servers": true,
+        "last_contact_threshold": "200ms",
+        "max_trailing_logs": 250,
+        "server_stabilization_time": "10s",
+        "redundancy_zone_tag": "zone",
+        "disable_upgrade_migration": true,
+        "upgrade_version_tag": ""
+      },
+      "audit" : {
+        "enabled": true,
+        "sink" : {
+          "a_sink" : {
+            "type"   :"file",
+            "format" : "json",
+            "path"   : "/consul/data/audit/log.json",
+            "delivery_guarantee" : "best-effort",
+            "rotate_duration" : "24h",
+            "rotate_max_files" : 15,
+            "rotate_bytes" : 25165824
+          }
+        }
+      }
+    }
+client:
+  snapshotAgent:
+    enabled: true
+    replicas: 2
+    configSecret:
+      secretName: snapshot-agent-config
+      secretKey: snaphshot_agent.json
+
+connectInject:
+  enabled: true
+
+ui:
+  service:
+    type: NodePort
+
+meshGateway:
+  enabled: false
+
+ingressGateways:
+  enabled: false
+
+terminatingGateways:
+  enabled: false

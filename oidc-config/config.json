@@ -1,0 +1,20 @@
+{
+  "idp_name": "http://192.168.178.40:9000",
+  "port": 9000,
+  "client_config": [
+    {
+      "client_id": "foo",
+      "client_secret": "bar",
+      "redirect_uris": [
+        "https://192.168.64.251:30822/ui/oidc/callback",
+        "http://localhost:8550/oidc/callback"
+      ]
+    }
+  ],
+  "claim_mapping": {
+    "openid": [ "sub" , "groups", "name" ],
+    "email": [ "email", "email_verified" ],
+    "profile": [ "name", "nickname" ],
+    "groups": [ "groups" ]
+  }
+}

@@ -1,0 +1,16 @@
+version: '3.6'
+services:
+# https://hub.docker.com/r/qlik/simple-oidc-provider/
+  simple-oidc-provider:
+    container_name: simple-oidc-provider
+    hostname: simple-oidc-provider
+    image: qlik/simple-oidc-provider
+    volumes:
+      - ./oidc-config/:/config/
+    environment:
+      - REDIRECTS=$REDIRECT_URI1,$REDIRECT_URI2
+      - IDP_NAME=$OIDCDiscoveryURL
+      - USERS_FILE=/config/users.json
+      - CONFIG_FILE=/config/config.json
+    ports:
+      - "9000:9000"

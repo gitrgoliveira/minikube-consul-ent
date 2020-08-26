@@ -1,0 +1,29 @@
+[
+  {
+    "id": "SIMPLE_OIDC_USER_ANDRE",
+    "email": "andre@hashi",
+    "email_verified": true,
+    "name": "Andre",
+    "nickname": "andre",
+    "password": "password",
+    "groups": ["everyone", "sales"]
+  },
+  {
+    "id": "SIMPLE_OIDC_USER_RIC",
+    "email": "ricardo@hashi",
+    "email_verified": true,
+    "name": "Ricardo",
+    "nickname": "ricardo",
+    "password": "password",
+    "groups": ["everyone", "engineering"]
+  },
+  {
+    "id": "SIMPLE_OIDC_USER_GUY",
+    "email": "guy@hashi",
+    "email_verified": true,
+    "name": "Guy",
+    "nickname": "guy",
+    "password": "password",
+    "groups": ["everyone", "admin"]
+  }
+]

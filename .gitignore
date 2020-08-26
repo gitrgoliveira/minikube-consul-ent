@@ -1,0 +1,11 @@
+consul/*
+consul-helm
+consul-helm/*
+manifests/*
+.DS_Store
+*.hclic
+*.cert
+auth_config.json
+auth.json
+token
+dev.token
