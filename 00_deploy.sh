@@ -155,15 +155,17 @@ echo "Login token $(kubectl get secrets consul-bootstrap-acl-token -o json | jq 
 
 ## SSO login command
 # consul login -type=oidc -method=simple-oidc -token-sink-file=./token
+# consul login -type=oidc -method=aad -token-sink-file=./token
 # cat token
 
 ## Audit logs
-# kubectl get pods -l component=server -o name | awk '{ print "kubectl exec "$1" -- grep -ri <search word> /consul/data/audit/" }' |bash
-# kubectl get pods -l component=server -o name | awk '{ print "kubectl exec "$1" -- grep -ri bootstrap /consul/data/audit/" }' |bash
-# kubectl get pods -l component=server -o name | awk '{ print "kubectl exec "$1" -- grep -r OIDC /consul/data/audit/" }' |bash
+# kubectl exec consul-server-0 -- grep -ri <search word> /consul/data/audit/
+# kubectl exec consul-server-0 -- grep -ri bootstrap /consul/data/audit/
+# kubectl exec consul-server-0 -- grep -ri OIDC /consul/data/audit/
 
 
 ### useful shortcuts ###
+# kubectl get pods -l component=server -o name | awk '{ print "kubectl exec "$1" -- grep -ri <search word> /consul/data/audit/" }' |bash
 # kubectl get pods | grep <pod name> | awk '{print $1}' | xargs kubectl delete pod
 # kubectl get pods | grep consul-server-b- | awk '{print $1}' | xargs kubectl delete pod
 # consul acl binding-rule list -method=<oidc-method> -format=json | jq -r .[].ID | awk '{ print "consul acl binding-rule delete -id " $1}' | bash
