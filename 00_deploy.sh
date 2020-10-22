@@ -134,9 +134,13 @@ consul acl binding-rule create \
     -bind-name='eng-${value.first_name}' \
     -selector='engineering in list.groups' || true
 
-minikube service list
+# minikube service list
+
+echo ""
+echo "================================"
 echo "Consul UI $(minikube service consul-ui --https --url)"
 echo "Login token $(kubectl get secrets consul-bootstrap-acl-token -o json | jq -r .data.token | base64 -D )"
+echo "================================"
 
 ## Namespace Demo
 # Using Consul pod

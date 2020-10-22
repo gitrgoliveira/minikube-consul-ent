@@ -68,9 +68,9 @@ Please read the requirements before proceeding.
 4. (optional) Run `consul login -type=oidc -method=simple-oidc -token-sink-file=./token` and see you have a new token file. (take care because simple-OIDC will remember you!)
 
 ### Audit logs
-1. run `kubectl get pods -l component=server -o name | awk '{ print "kubectl exec "$1" -- grep -r Bootstrap /consul/data/audit/" }' |bash`
+1. run `kubectl exec consul-server-0 -- grep -r Bootstrap /consul/data/audit/`
    1. This will allow you to quickly see where/when the bootstrap token was used
-2. run `kubectl get pods -l component=server -o name | awk '{ print "kubectl exec "$1" -- grep -r OIDC /consul/data/audit/" }' |bash`
+2. run `kubectl exec consul-server-0 -- grep -r OIDC /consul/data/audit/`
    1. This allows you to see when the OIDC method was used and the **accessor_id**
    2. Get the accessor ID and run `consul acl token read -id <accessor_id>` to see who logged in!
 
